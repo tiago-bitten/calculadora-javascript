@@ -13,6 +13,10 @@ document.addEventListener('click', (e) => {
     if (target.classList.contains('button-cls')) {
         clsDisplay()
     }
+
+    if (target.classList.contains('button-cls-all')) {
+        clsAllDisplay()
+    }
 })
 
 function addDisplay(num) {
@@ -21,4 +25,8 @@ function addDisplay(num) {
 
 function clsDisplay() {
     display.value = display.value.slice(0, -1)
+}
+
+function clsAllDisplay() {
+    display.value = ''
 }
