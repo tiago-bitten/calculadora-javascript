@@ -1,7 +1,7 @@
 const display = document.querySelector('.display')
 const buttons = document.querySelector('.nums-button')
 
-buttons.addEventListener('click', (e) => {
+document.addEventListener('click', (e) => {
     const target = e.target
 
     if (target.classList.contains('button-num')) {
@@ -9,8 +9,16 @@ buttons.addEventListener('click', (e) => {
         
         addDisplay(num)
     }
+
+    if (target.classList.contains('button-cls')) {
+        clsDisplay()
+    }
 })
 
 function addDisplay(num) {
     display.value += num
+}
+
+function clsDisplay() {
+    display.value = display.value.slice(0, -1)
 }
