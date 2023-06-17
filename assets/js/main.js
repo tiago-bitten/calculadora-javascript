@@ -6,12 +6,15 @@ document.addEventListener('click', (e) => {
 
     if (target.classList.contains('button-num')) {
         const num = target.innerText       
-        addDisplay(num)
+        addDisplay(num, 'num')
     }
 
     if (target.classList.contains('button-operation')) {
         if (display.value !== '') {
-            addDisplay(target.innerText)
+            const check = checkMoreThanOneOperation()
+
+            addDisplay(target.innerText, 'operation')
+
         } else {
             alert('Digite um número primeiro!')
         }
@@ -19,7 +22,7 @@ document.addEventListener('click', (e) => {
 
     if (target.classList.contains('button-equal')) {
         const result = calc()
-        display.value = result
+        addDisplay(result, 'result')
     }
 
     if (target.classList.contains('button-cls')) {
@@ -31,8 +34,12 @@ document.addEventListener('click', (e) => {
     }
 })
 
-function addDisplay(num) {
-    display.value += num
+function addDisplay(val, type) {
+    if (type === 'result') {
+        display.value = val
+    } else {
+        display.value += val
+    }
 }
 
 function clsDisplay() {
@@ -44,5 +51,6 @@ function clsAllDisplay() {
 }
 
 function calc() {
-    return eval(display.value)
+    const result = eval(display.value)
+    return result
 }
