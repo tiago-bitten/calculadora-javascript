@@ -15,7 +15,7 @@ document.addEventListener('click', (e) => {
             clsAllDisplay()
             clsAll = false
         }
-        
+
         const num = target.innerText
         addDisplay(num, 'num')
 
@@ -44,6 +44,18 @@ document.addEventListener('click', (e) => {
 
             expressionArr = []
             clsAll = true
+        }
+    }
+
+    if (target.classList.contains('button-history')) {
+        if (avaliableLocalStorageHistory()) {
+            const history = getLocalStorageHistory()
+
+            if (history.length !== 0) {
+                for (let i = 0; i < history.length; i++) {
+                    addDisplay(history[i].exp, 'history')
+                }
+            }
         }
     }
 
@@ -79,12 +91,45 @@ function calculate() {
     try {
         result = eval(expressionStr)
         resExpression = `${expressionStr}=${result}`
+        setLocalStorageHistory(resExpression)
 
         result = Number(result)
         if (Number.isInteger(result)) return result
         else return result.toFixed(2)
 
     } catch (err) {
-        alert('Erro na expressão!')
+        console.log(err)
     }
 }
+
+function avaliableLocalStorageHistory() {
+    if (localStorage.getItem('History')) {
+        return true
+    }
+    return false
+}
+
+function getLocalStorageHistory() {
+    const historyStorage = localStorage.getItem('History')
+    const historyArr = JSON.parse(historyStorage)
+
+    return historyArr
+}
+
+function setLocalStorageHistory(expression) {
+    const existingHistory = localStorage.getItem('History');
+
+    if (!(existingHistory)) {
+        const historyArr = []
+        const historyJson = JSON.stringify(historyArr)
+        localStorage.setItem('History', historyJson)
+    }
+
+    const historyArr = getLocalStorageHistory()
+
+    const historyObj = { exp: expression }
+    historyArr.push(historyObj)
+
+    const historyJson = JSON.stringify(historyArr)
+    localStorage.setItem('History', historyJson)
+}  
