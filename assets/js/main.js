@@ -2,22 +2,26 @@ const display = document.querySelector('.display')
 const buttons = document.querySelector('.nums-button')
 
 let opTurn = false
-let clsAfterRes = false
+let clsAll = false
 
 let expressionArr = []
+let resExpression = null
 
 document.addEventListener('click', (e) => {
     const target = e.target
 
     if (target.classList.contains('button-num')) {
-        if (!(clsAfterRes)) {
-            const num = target.innerText       
-            addDisplay(num, 'num')
-
-            expressionArr.push(num)
-    
-            opTurn = true
+        if (clsAll) {
+            clsAllDisplay()
+            clsAll = false
         }
+        
+        const num = target.innerText
+        addDisplay(num, 'num')
+
+        expressionArr.push(num)
+
+        opTurn = true
     }
 
     if (target.classList.contains('button-operator')) {
@@ -28,7 +32,7 @@ document.addEventListener('click', (e) => {
             } else {
                 expressionArr.push(operator)
             }
-            clsAllDisplay()
+            clsAll = true
             opTurn = false
         }
     }
@@ -37,8 +41,9 @@ document.addEventListener('click', (e) => {
         if (!(expressionArr.length === 0)) {
             const result = calculate()
             addDisplay(result, 'result')
-    
+
             expressionArr = []
+            clsAll = true
         }
     }
 
