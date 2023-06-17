@@ -2,28 +2,44 @@ const display = document.querySelector('.display')
 const buttons = document.querySelector('.nums-button')
 
 let opTurn = false
+let clsAfterRes = false
+
+let expressionArr = []
 
 document.addEventListener('click', (e) => {
     const target = e.target
 
     if (target.classList.contains('button-num')) {
-        const num = target.innerText       
-        addDisplay(num, 'num')
+        if (!(clsAfterRes)) {
+            const num = target.innerText       
+            addDisplay(num, 'num')
 
-        opTurn = true
+            expressionArr.push(num)
+    
+            opTurn = true
+        }
     }
 
     if (target.classList.contains('button-operator')) {
         if (opTurn) {
             const operator = target.innerText
-            addDisplay(operator, 'operator')
+            if (operator === 'x') {
+                expressionArr.push('*')
+            } else {
+                expressionArr.push(operator)
+            }
+            clsAllDisplay()
             opTurn = false
         }
     }
 
     if (target.classList.contains('button-equal')) {
-        const result = calculate()
-        addDisplay(result, 'result')
+        if (!(expressionArr.length === 0)) {
+            const result = calculate()
+            addDisplay(result, 'result')
+    
+            expressionArr = []
+        }
     }
 
     if (target.classList.contains('button-cls')) {
@@ -52,6 +68,14 @@ function clsAllDisplay() {
 }
 
 function calculate() {
-    const result = eval(display.value)
-    return result
+    const expressionStr = expressionArr.join('')
+    let result = ''
+
+    try {
+        result = eval(expressionStr)
+        return result
+
+    } catch (err) {
+        alert('Erro na expressão!')
+    }
 }
