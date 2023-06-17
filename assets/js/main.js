@@ -78,7 +78,11 @@ function calculate() {
 
     try {
         result = eval(expressionStr)
-        return result
+        resExpression = `${expressionStr}=${result}`
+
+        result = Number(result)
+        if (Number.isInteger(result)) return result
+        else return result.toFixed(2)
 
     } catch (err) {
         alert('Erro na expressão!')
