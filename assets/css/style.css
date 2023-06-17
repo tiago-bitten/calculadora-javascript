@@ -1,16 +1,147 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap');
 
- * {
+* {
     margin: 0;
     padding: 0;
- }
+}
 
- body {
+body {
     font-family: 'Open sans', sans-serif;
- }
+}
 
- .container {
+/* Estilos para a calculadora */
+.container {
     display: flex;
     justify-content: center;
-    margin-top: 15%;
- }
+    align-items: center;
+    height: 100vh;
+}
+
+.calc {
+    background-color: #f2f2f2;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.div-display {
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.display {
+    width: 100%;
+    padding: 10px;
+    font-size: 20px;
+    text-align: right;
+    animation: showResult 0.3s ease;
+}
+
+.nums-button {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.operation-buttons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.button-num {
+    padding: 10px;
+    font-size: 18px;
+    text-align: center;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button-cls-all,
+.button-cls,
+.button-div,
+.button-multi,
+.button-plus,
+.button-les,
+.button-equal {
+    padding: 10px;
+    font-size: 18px;
+    text-align: center;
+    background-color: #f2f2f2;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Estilos adicionais para melhorar a aparência */
+
+.container {
+    background-color: #f7f7f7;
+}
+
+.calc {
+    width: 250px;
+    max-width: 100%;
+}
+
+.display {
+    border: none;
+    background-color: #eaeaea;
+}
+
+.button-equal {
+    background-color: #ff9800;
+    color: #ffffff;
+}
+
+.button-equal:hover {
+    background-color: #e69500;
+}
+
+.button-cls-all,
+.button-cls,
+.button-div,
+.button-multi,
+.button-plus,
+.button-les {
+    background-color: #eaeaea;
+}
+
+.button-cls-all:hover,
+.button-cls:hover,
+.button-div:hover,
+.button-multi:hover,
+.button-plus:hover,
+.button-les:hover {
+    background-color: #cccccc;
+}
+
+/* Animações */
+@keyframes showResult {
+    0% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.button-num:active,
+.button-cls-all:active,
+.button-cls:active,
+.button-div:active,
+.button-multi:active,
+.button-plus:active,
+.button-les:active,
+.button-equal:active {
+    background-color: #cccccc;
+}

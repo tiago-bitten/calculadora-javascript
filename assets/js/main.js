@@ -1,5 +1,5 @@
 const display = document.querySelector('.display')
-const buttons = document.querySelector('.buttons')
+const buttons = document.querySelector('.nums-button')
 
 buttons.addEventListener('click', (e) => {
     const target = e.target
@@ -12,5 +12,5 @@ buttons.addEventListener('click', (e) => {
 })
 
 function addDisplay(num) {
-    display.value + = num
+    display.value += num
 }
