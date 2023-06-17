@@ -45,7 +45,7 @@ body {
     margin-bottom: 10px;
 }
 
-.operation-buttons {
+.operator-buttons {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
@@ -64,7 +64,7 @@ body {
 
 .button-cls-all,
 .button-cls,
-.button-operation,
+.button-operator,
 .button-equal {
     padding: 10px;
     font-size: 18px;
@@ -103,13 +103,13 @@ body {
 
 .button-cls-all,
 .button-cls,
-.button-operation {
+.button-operator {
     background-color: #eaeaea;
 }
 
 .button-cls-all:hover,
 .button-cls:hover,
-.button-operation:hover {
+.button-operator:hover {
     background-color: #cccccc;
 }
 

@@ -1,22 +1,23 @@
 const display = document.querySelector('.display')
 const buttons = document.querySelector('.nums-button')
 
+let opTurn = false
+
 document.addEventListener('click', (e) => {
     const target = e.target
 
     if (target.classList.contains('button-num')) {
         const num = target.innerText       
         addDisplay(num, 'num')
+
+        opTurn = true
     }
 
-    if (target.classList.contains('button-operation')) {
-        if (display.value !== '') {
-            const check = checkMoreThanOneOperation()
-
-            addDisplay(target.innerText, 'operation')
-
-        } else {
-            alert('Digite um número primeiro!')
+    if (target.classList.contains('button-operator')) {
+        if (opTurn) {
+            const operator = target.innerText
+            addDisplay(operator, 'operator')
+            opTurn = false
         }
     }
 
