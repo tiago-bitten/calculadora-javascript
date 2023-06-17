@@ -64,10 +64,7 @@ body {
 
 .button-cls-all,
 .button-cls,
-.button-div,
-.button-multi,
-.button-plus,
-.button-les,
+.button-operation,
 .button-equal {
     padding: 10px;
     font-size: 18px;
@@ -106,19 +103,13 @@ body {
 
 .button-cls-all,
 .button-cls,
-.button-div,
-.button-multi,
-.button-plus,
-.button-les {
+.button-operation {
     background-color: #eaeaea;
 }
 
 .button-cls-all:hover,
 .button-cls:hover,
-.button-div:hover,
-.button-multi:hover,
-.button-plus:hover,
-.button-les:hover {
+.button-operation:hover {
     background-color: #cccccc;
 }
 
