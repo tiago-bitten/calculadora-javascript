@@ -22,7 +22,7 @@ document.addEventListener('click', (e) => {
     }
 
     if (target.classList.contains('button-equal')) {
-        const result = calc()
+        const result = calculate()
         addDisplay(result, 'result')
     }
 
@@ -51,7 +51,7 @@ function clsAllDisplay() {
     display.value = ''
 }
 
-function calc() {
+function calculate() {
     const result = eval(display.value)
     return result
 }
