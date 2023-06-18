@@ -8,7 +8,7 @@ let resExpression = null
 
 document.addEventListener('click', (e) => {
     const target = e.target
-    console.log(target)
+    console.log(target.textContent)
 
     if (target.classList.contains('button-num')) {
         if (clsAll) {
@@ -26,9 +26,11 @@ document.addEventListener('click', (e) => {
 
     if (target.classList.contains('button-operator')) {
         if (opTurn) {
-            const operator = target.innerText
-            if (operator === 'x') {
+            const operator = target.textContent
+            if (operator === '×') {
                 expressionArr.push('*')
+            } else if (operator === '÷') {
+                expressionArr.push('/')
             } else {
                 expressionArr.push(operator)
             }
