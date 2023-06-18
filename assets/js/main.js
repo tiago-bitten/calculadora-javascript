@@ -1,5 +1,4 @@
 const display = document.querySelector('.display')
-const buttons = document.querySelector('.nums-button')
 
 let opTurn = false
 let clsAll = false
@@ -9,6 +8,7 @@ let resExpression = null
 
 document.addEventListener('click', (e) => {
     const target = e.target
+    console.log(target)
 
     if (target.classList.contains('button-num')) {
         if (clsAll) {
@@ -49,13 +49,16 @@ document.addEventListener('click', (e) => {
 
     if (target.classList.contains('button-history')) {
         if (avaliableLocalStorageHistory()) {
-            const history = getLocalStorageHistory()
+            const historys = getLocalStorageHistory()
+            let history = ''
 
-            if (history.length !== 0) {
-                for (let i = 0; i < history.length; i++) {
-                    addDisplay(history[i].exp, 'history')
+            if (historys.length !== 0) {
+                for (let i = 0; i < historys.length; i++) {
+                    history += `${historys[i].exp}\n`
                 }
             }
+
+            createAlertMessage('Histórico', history)
         }
     }
 
@@ -70,18 +73,18 @@ document.addEventListener('click', (e) => {
 
 function addDisplay(val, type) {
     if (type === 'result') {
-        display.value = val
+        display.textContent = val
     } else {
-        display.value += val
+        display.textContent += val
     }
 }
 
 function clsDisplay() {
-    display.value = display.value.slice(0, -1)
+    display.textContent = display.textContent.slice(0, -1)
 }
 
 function clsAllDisplay() {
-    display.value = ''
+    display.textContent = ''
 }
 
 function calculate() {
@@ -90,7 +93,7 @@ function calculate() {
 
     try {
         result = eval(expressionStr)
-        resExpression = `${expressionStr}=${result}`
+        resExpression = `${expressionStr} = ${result}`
         setLocalStorageHistory(resExpression)
 
         result = Number(result)
@@ -132,4 +135,16 @@ function setLocalStorageHistory(expression) {
 
     const historyJson = JSON.stringify(historyArr)
     localStorage.setItem('History', historyJson)
-}  
+}
+
+function createAlertMessage(title, msg) {
+    const container = document.querySelector('.container');
+    const alertHTML = `
+        <div class="overlay">
+            <div class="alert">
+                <span class="closebtn" onclick="this.parentElement.parentElement.remove();">&times;</span>
+                <strong>${title}:<br></strong> <span style="margin-bottom: 15;">${msg.replace(/\n/g, '<br>')}</span>
+            </div>
+        </div>`;
+    container.insertAdjacentHTML('beforeend', alertHTML);
+}

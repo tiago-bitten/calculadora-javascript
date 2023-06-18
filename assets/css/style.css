@@ -9,7 +9,6 @@ body {
     font-family: 'Open sans', sans-serif;
 }
 
-/* Estilos para a calculadora */
 .container {
     display: flex;
     justify-content: center;
@@ -135,4 +134,41 @@ body {
 .button-les:active,
 .button-equal:active {
     background-color: #cccccc;
+}
+
+/* Estilos para o alerta */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.alert {
+    background-color: white;
+    color: #585858;
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 18px;
+    text-align: left;
+    position: relative;
+}
+
+.closebtn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    color: white;
+    font-size: 22px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.closebtn:hover {
+    color: black;
 }
