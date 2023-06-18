@@ -58,7 +58,8 @@ body {
     gap: 10px;
 }
 
-.button-num {
+.button-num,
+.button-comma {
     padding: 10px;
     font-size: 18px;
     text-align: center;
@@ -139,7 +140,8 @@ body {
 .button-multi:active,
 .button-plus:active,
 .button-les:active,
-.button-equal:active {
+.button-equal:active,
+.button-comma:active {
     background-color: #cccccc;
 }
 
