@@ -4,12 +4,9 @@ let opTurn = false
 let clsAll = false
 
 let expressionArr = []
-let resExpression = null
 
 document.addEventListener('click', (e) => {
     const target = e.target
-    console.log(target.textContent)
-
     if (target.classList.contains('button-num')) {
         if (clsAll) {
             clsAllDisplay()
@@ -17,9 +14,13 @@ document.addEventListener('click', (e) => {
         }
 
         const num = target.innerText
-        addDisplay(num, 'num')
-
         expressionArr.push(num)
+
+        if (expressionArr[0] === '0') {
+            expressionArr.splice(0, 1)
+        } else {
+            addDisplay(num, 'num')
+        }
 
         opTurn = true
     }
@@ -92,15 +93,20 @@ function clsAllDisplay() {
 function calculate() {
     const expressionStr = expressionArr.join('')
     let result = ''
+    let resExpression = ''
 
     try {
         result = eval(expressionStr)
+
+        result = Number(result)
+        if (!(Number.isInteger(result))) {
+            result = result.toFixed(2)
+        }
+
         resExpression = `${expressionStr} = ${result}`
         setLocalStorageHistory(resExpression)
 
-        result = Number(result)
-        if (Number.isInteger(result)) return result
-        else return result.toFixed(2)
+        return result
 
     } catch (err) {
         console.log(err)
