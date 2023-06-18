@@ -8,7 +8,7 @@ let expressionArr = []
 
 document.addEventListener('click', (e) => {
     const target = e.target
-    const val = target.innerText
+    const val = target.textContent
 
     if (target.classList.contains('button-num')) {
         if (clsAll) {
@@ -18,12 +18,24 @@ document.addEventListener('click', (e) => {
 
         expressionArr.push(val)
 
-        if (!(checkZero(expressionArr, val))) {
+        if (!(checkZero(expressionArr))) {
             addDisplay(val, 'num')
         }
-        // checkComma(expressionArr, val)
 
         opTurn = true
+    }
+
+    if (target.classList.contains('button-comma')) {
+        if (comma) {
+            comma = false
+            if (expressionArr[0] === ',') {
+                expressionArr.push('0.')
+                addDisplay(val, 'comma')
+            } else {
+                expressionArr.push('.')
+                addDisplay(val, 'comma')
+            }
+        }
     }
 
     if (target.classList.contains('button-operator')) {
@@ -68,11 +80,15 @@ document.addEventListener('click', (e) => {
 
     if (target.classList.contains('button-cls')) {
         clsDisplay()
+        expressionArr.pop()
     }
 
     if (target.classList.contains('button-cls-all')) {
         clsAllDisplay()
+        expressionArr = []
     }
+
+    console.log(expressionArr)
 })
 
 function addDisplay(val, type) {
@@ -84,11 +100,13 @@ function addDisplay(val, type) {
 }
 
 function clsDisplay() {
-    display.textContent = display.textContent.slice(0, -1)
+    if (display.textContent !== '0') {
+        display.textContent = display.textContent.slice(0, -1)
+    }
 }
 
 function clsAllDisplay() {
-    display.textContent = ''
+    display.textContent = '0'
 }
 
 function calculate() {
@@ -98,6 +116,7 @@ function calculate() {
     let resExpression = ''
 
     try {
+        console.log(expressionStr)
         result = eval(expressionStr)
 
         result = Number(result)
@@ -115,29 +134,24 @@ function calculate() {
     }
 }
 
-function checkZero(arr, val) {
+function checkZero(arr) {
     if (arr[0] === '0') {
         arr.splice(0, 1)
+        if (display.textContent === '0') {
+            display.textContent = ''
+        }
         return true
-    } else {
-        return false
     }
-}
-/*
-function checkComma(arr, val) {
-    if (comma) {
-        comma = false
-        if (arr[0] === val) {
 
-        }   
-    }
+    return false
 }
-*/
+
 function convertExpression(expression) {
     const plusLessRegex = /\+|\-/g
     const divMultiRegex = /\/|\*/g
+    const commaRegex = /\,/g
 
-    const convertExpress = expression.map((item) => {
+    const convertMultiDiv = expression.map((item) => {
         return item.replace(divMultiRegex, (match) => {
             if (match === '/') {
                 return '÷'
@@ -147,7 +161,11 @@ function convertExpression(expression) {
         })
     })
 
-    const finalExpress = convertExpress.map((item) => {
+    const convertCammo = convertMultiDiv.map((item) => {
+        return item.replace(commaRegex, '.')
+    })
+
+    const finalExpress = convertCammo.map((item) => {
         return item.replace(plusLessRegex, (match) => {
             if (match === '+') {
                 return ' + '
