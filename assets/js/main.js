@@ -2,7 +2,7 @@ const display = document.querySelector('.display')
 
 let opTurn = false
 let clsAll = false
-let comma = true 
+let comma = true
 
 let expressionArr = []
 
@@ -33,7 +33,7 @@ document.addEventListener('click', (e) => {
             clsAllDisplay()
             clsAll = false
         }
-        
+
         if (comma) {
             expressionArr.push('.')
             comma = false
@@ -54,7 +54,7 @@ document.addEventListener('click', (e) => {
             } else if (operator === '÷') {
                 expressionArr.push(' / ')
             } else {
-                expressionArr.push(operator.concat(''))
+                expressionArr.push(operator)
             }
             clsAll = true
             comma = true
@@ -158,37 +158,28 @@ function checkZero(arr) {
 }
 
 function convertExpression(expression) {
-    const plusLessRegex = /\+|\-/g
-    const divMultiRegex = /\/|\*/g
-    const commaRegex = /\./g
+    const operatorsRegex = /[-+*/.]/g;
 
-    const convertMultiDiv = expression.map((item) => {
-        return item.replace(divMultiRegex, (match) => {
-            if (match === '/') {
-                return '÷'
-            } else if (match === '*') {
-                return '×'
+    const convertExpression = expression.map((item) => {
+        return item.replace(operatorsRegex, (match) => {
+            switch (match) {
+                case '/':
+                    return '÷';
+                case '*':
+                    return '×';
+                case '+':
+                    return ' + ';
+                case '-':
+                    return ' - ';
+                case '.':
+                    return ',';
+                default:
+                    return match;
             }
-        })
-    })
+        });
+    });
 
-    const convertCammo = convertMultiDiv.map((item) => {
-        return item.replace(commaRegex, ',')
-    })
-
-    const finalExpress = convertCammo.map((item) => {
-        return item.replace(plusLessRegex, (match) => {
-            if (match === '+') {
-                return ' + '
-            } else if (match === '-') {
-                return ' - '
-            }
-        })
-    })
-
-    const finalExpressStr = finalExpress.join('')
-
-    return finalExpressStr
+    return convertExpression.join('');
 }
 
 function avaliableLocalStorageHistory() {
