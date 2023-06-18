@@ -1,5 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap');
 
+:root {
+    --operator-button: #eaeaea;
+    --operator-button-hover: #cccc;
+
+    --orange-button: #ff9800;
+    --orange-button-hover: #e69500;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -68,8 +76,7 @@ body {
     padding: 10px;
     font-size: 18px;
     text-align: center;
-    background-color: #f2f2f2;
-    border: 1px solid #cccccc;
+    border: 1px solid var(--operator-button-hover);
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
@@ -92,24 +99,24 @@ body {
 }
 
 .button-equal {
-    background-color: #ff9800;
+    background-color: var(--orange-button);
     color: #ffffff;
 }
 
 .button-equal:hover {
-    background-color: #e69500;
+    background-color: var(--orange-button-hover);
 }
 
 .button-cls-all,
 .button-cls,
 .button-operator {
-    background-color: #eaeaea;
+    background-color: var(--operator-button);
 }
 
 .button-cls-all:hover,
 .button-cls:hover,
 .button-operator:hover {
-    background-color: #cccccc;
+    background-color: var(--operator-button-hover);
 }
 
 /* Animações */
@@ -152,7 +159,7 @@ body {
 .alert {
     background-color: white;
     color: #585858;
-    padding: 15px;
+    padding: 25px;
     border-radius: 5px;
     font-size: 18px;
     text-align: left;
@@ -161,14 +168,14 @@ body {
 
 .closebtn {
     position: absolute;
-    top: 5px;
+    top: -5px;
     right: 5px;
-    color: white;
+    color: var(--orange-button)  ;
     font-size: 22px;
     font-weight: bold;
     cursor: pointer;
 }
 
 .closebtn:hover {
-    color: black;
+    color: var(--orange-button-hover);
 }
