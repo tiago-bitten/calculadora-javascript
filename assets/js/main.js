@@ -19,6 +19,7 @@ document.addEventListener('click', (e) => {
         if (expressionArr[0] === '0') {
             expressionArr.splice(0, 1)
         } else {
+
             addDisplay(num, 'num')
         }
 
@@ -29,11 +30,11 @@ document.addEventListener('click', (e) => {
         if (opTurn) {
             const operator = target.textContent
             if (operator === '×') {
-                expressionArr.push('*')
+                expressionArr.push(' * ')
             } else if (operator === '÷') {
-                expressionArr.push('/')
+                expressionArr.push(' / ')
             } else {
-                expressionArr.push(operator)
+                expressionArr.push(operator.concat(''))
             }
             clsAll = true
             opTurn = false
@@ -57,7 +58,7 @@ document.addEventListener('click', (e) => {
 
             if (historys.length !== 0) {
                 for (let i = 0; i < historys.length; i++) {
-                    history += `${historys[i].exp}\n`
+                    history += `${historys[i].exp}<br>`
                 }
             }
 
@@ -91,6 +92,7 @@ function clsAllDisplay() {
 }
 
 function calculate() {
+    const convertExpress = convertExpression(expressionArr)
     const expressionStr = expressionArr.join('')
     let result = ''
     let resExpression = ''
@@ -103,7 +105,7 @@ function calculate() {
             result = result.toFixed(2)
         }
 
-        resExpression = `${expressionStr} = ${result}`
+        resExpression = `${convertExpress} = ${result}`
         setLocalStorageHistory(resExpression)
 
         return result
@@ -111,6 +113,36 @@ function calculate() {
     } catch (err) {
         console.log(err)
     }
+}
+
+function convertExpression(expression) {
+    const plusLessRegex = /\+|\-/g
+    
+    const divMultiRegex = /\/|\*/g
+
+    const convertExpress = expression.map((item) => {
+        return item.replace(divMultiRegex, (match) => {
+            if (match === '/') {
+                return '÷'
+            } else if (match === '*') {
+                return '×'
+            }
+        })
+    })
+
+    const finalExpress = convertExpress.map((item) => {
+        return item.replace(plusLessRegex, (match) => {
+            if (match === '+') {
+                return ' + '
+            } else if (match === '-') {
+                return ' - '
+            }
+        })
+    })
+
+    const finalExpressStr = finalExpress.join('')
+
+    return finalExpressStr
 }
 
 function avaliableLocalStorageHistory() {
@@ -128,9 +160,7 @@ function getLocalStorageHistory() {
 }
 
 function setLocalStorageHistory(expression) {
-    const existingHistory = localStorage.getItem('History');
-
-    if (!(existingHistory)) {
+    if (!(avaliableLocalStorageHistory())) {
         const historyArr = []
         const historyJson = JSON.stringify(historyArr)
         localStorage.setItem('History', historyJson)
@@ -151,7 +181,7 @@ function createAlertMessage(title, msg) {
         <div class="overlay">
             <div class="alert">
                 <span class="closebtn" onclick="this.parentElement.parentElement.remove();">&times;</span>
-                <strong>${title}:<br></strong> <span style="margin-bottom: 15;">${msg.replace(/\n/g, '<br>')}</span>
+                <strong>${title}:<br></strong> <span style="margin-bottom: 15;">${msg}</span>
             </div>
         </div>`;
     container.insertAdjacentHTML('beforeend', alertHTML);
