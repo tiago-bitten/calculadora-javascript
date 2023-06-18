@@ -59,6 +59,7 @@ body {
 }
 
 .button-num,
+.button-plus-less,
 .button-comma {
     padding: 10px;
     font-size: 18px;
@@ -141,6 +142,7 @@ body {
 .button-plus:active,
 .button-les:active,
 .button-equal:active,
+.button-plus-less:active,
 .button-comma:active {
     background-color: #cccccc;
 }
