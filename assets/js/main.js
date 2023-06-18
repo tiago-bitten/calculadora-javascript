@@ -37,7 +37,7 @@ document.addEventListener('click', (e) => {
         if (comma) {
             expressionArr.push('.')
             comma = false
-            if (expressionArr[0] === ',') {
+            if (expressionArr[0] === '.') {
                 expressionArr.splice(0, 1, '0.')
                 addDisplay(val, 'comma')
             } else {
@@ -133,6 +133,9 @@ function calculate() {
         if (!(Number.isInteger(result))) {
             result = result.toFixed(2)
         }
+
+        result = String(result)
+        result.replace('.', ',')
 
         resExpression = `${convertExpress} = ${result}`
         setLocalStorageHistory(resExpression)
