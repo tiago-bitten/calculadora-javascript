@@ -2,6 +2,7 @@ const display = document.querySelector('.display')
 
 let opTurn = false
 let clsAll = false
+let comma = true 
 
 let expressionArr = []
 
@@ -16,12 +17,9 @@ document.addEventListener('click', (e) => {
         const num = target.innerText
         expressionArr.push(num)
 
-        if (expressionArr[0] === '0') {
-            expressionArr.splice(0, 1)
-        } else {
+        checkZero(expressionArr, num)
+        // checkComma(expressionArr, num)
 
-            addDisplay(num, 'num')
-        }
 
         opTurn = true
     }
@@ -115,9 +113,29 @@ function calculate() {
     }
 }
 
+function checkZero(arr, val) {
+    if (arr[0] === '0') {
+        arr.splice(0, 1)
+    } else {
+        addDisplay(val, 'num')
+    }
+}
+/*
+function checkComma(arr, val) {
+    if (comma) {
+        comma = false
+        if (arr[0] === val) {
+            arr.splice(0, 1, '0.')
+            return true
+        } else {
+            addDisplay(val, 'num')
+        }
+    }
+    return false
+}
+*/
 function convertExpression(expression) {
     const plusLessRegex = /\+|\-/g
-    
     const divMultiRegex = /\/|\*/g
 
     const convertExpress = expression.map((item) => {
