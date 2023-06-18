@@ -8,18 +8,20 @@ let expressionArr = []
 
 document.addEventListener('click', (e) => {
     const target = e.target
+    const val = target.innerText
+
     if (target.classList.contains('button-num')) {
         if (clsAll) {
             clsAllDisplay()
             clsAll = false
         }
 
-        const num = target.innerText
-        expressionArr.push(num)
+        expressionArr.push(val)
 
-        checkZero(expressionArr, num)
-        // checkComma(expressionArr, num)
-
+        if (!(checkZero(expressionArr, val))) {
+            addDisplay(val, 'num')
+        }
+        // checkComma(expressionArr, val)
 
         opTurn = true
     }
@@ -116,8 +118,9 @@ function calculate() {
 function checkZero(arr, val) {
     if (arr[0] === '0') {
         arr.splice(0, 1)
+        return true
     } else {
-        addDisplay(val, 'num')
+        return false
     }
 }
 /*
@@ -125,13 +128,9 @@ function checkComma(arr, val) {
     if (comma) {
         comma = false
         if (arr[0] === val) {
-            arr.splice(0, 1, '0.')
-            return true
-        } else {
-            addDisplay(val, 'num')
-        }
+
+        }   
     }
-    return false
 }
 */
 function convertExpression(expression) {
