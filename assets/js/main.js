@@ -16,23 +16,31 @@ document.addEventListener('click', (e) => {
             clsAll = false
         }
 
+        if (display.textContent === '0') {
+            display.textContent = ''
+        }
+
         expressionArr.push(val)
 
         if (!(checkZero(expressionArr))) {
             addDisplay(val, 'num')
+            opTurn = true
         }
-
-        opTurn = true
     }
 
     if (target.classList.contains('button-comma')) {
+        if (clsAll) {
+            clsAllDisplay()
+            clsAll = false
+        }
+        
         if (comma) {
+            expressionArr.push('.')
             comma = false
             if (expressionArr[0] === ',') {
-                expressionArr.push('0.')
+                expressionArr.splice(0, 1, '0.')
                 addDisplay(val, 'comma')
             } else {
-                expressionArr.push('.')
                 addDisplay(val, 'comma')
             }
         }
@@ -49,6 +57,7 @@ document.addEventListener('click', (e) => {
                 expressionArr.push(operator.concat(''))
             }
             clsAll = true
+            comma = true
             opTurn = false
         }
     }
@@ -60,6 +69,7 @@ document.addEventListener('click', (e) => {
 
             expressionArr = []
             clsAll = true
+            comma = true
         }
     }
 
@@ -137,9 +147,7 @@ function calculate() {
 function checkZero(arr) {
     if (arr[0] === '0') {
         arr.splice(0, 1)
-        if (display.textContent === '0') {
-            display.textContent = ''
-        }
+        display.textContent = '0'
         return true
     }
 
@@ -149,7 +157,7 @@ function checkZero(arr) {
 function convertExpression(expression) {
     const plusLessRegex = /\+|\-/g
     const divMultiRegex = /\/|\*/g
-    const commaRegex = /\,/g
+    const commaRegex = /\./g
 
     const convertMultiDiv = expression.map((item) => {
         return item.replace(divMultiRegex, (match) => {
@@ -162,7 +170,7 @@ function convertExpression(expression) {
     })
 
     const convertCammo = convertMultiDiv.map((item) => {
-        return item.replace(commaRegex, '.')
+        return item.replace(commaRegex, ',')
     })
 
     const finalExpress = convertCammo.map((item) => {
