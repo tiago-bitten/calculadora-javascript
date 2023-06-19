@@ -58,10 +58,14 @@ document.addEventListener('click', (e) => {
         }
 
         if (comma) {
-            expressionArr.push('.')
             comma = false
+            const lastIndex = expressionArr.length
+            expressionArr.push('.')
             if (expressionArr[0] === '.') {
                 expressionArr.splice(0, 1, '0.')
+                addDisplay(val, 'comma')
+            } else  if (isNaN(expressionArr[lastIndex])) {
+                expressionArr.splice(lastIndex, 1, '0.')
                 addDisplay(val, 'comma')
             } else {
                 addDisplay(val, 'comma')
