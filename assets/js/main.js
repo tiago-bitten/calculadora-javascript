@@ -77,10 +77,10 @@ document.addEventListener('click', (e) => {
                 expressionArr.push(' / ')
             } else {
                 expressionArr.push(operator)
+                opTurn = false
             }
             clsAll = true
             comma = true
-            opTurn = false
         }
     }
 
