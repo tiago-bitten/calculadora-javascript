@@ -45,10 +45,10 @@ document.addEventListener('click', (e) => {
             newValue = String(newValue)
             expressionArr.pop()
             expressionArr.push(newValue)
-        }
 
-        display.textContent = ''
-        addDisplay(newValue, 'num')
+            display.textContent = ''
+            addDisplay(newValue, 'num')
+        }
     }
 
     if (target.classList.contains('button-comma')) {
@@ -78,10 +78,10 @@ document.addEventListener('click', (e) => {
                 expressionArr.push(' / ')
             } else {
                 expressionArr.push(operator)
-                opTurn = false
             }
             clsAll = true
             comma = true
+            opTurn = false
         }
     }
 
@@ -186,10 +186,10 @@ function checkZero(arr) {
 }
 
 function convertExpression(expression) {
-    const operatorsRegex = /[-+*/.]/g;
+    const regex = /[-+*/.]/g;
 
     const convertExpression = expression.map((item) => {
-        return item.replace(operatorsRegex, (match) => {
+        return item.replace(regex, (match) => {
             switch (match) {
                 case '/':
                     return '÷';
