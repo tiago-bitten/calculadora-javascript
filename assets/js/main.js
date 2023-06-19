@@ -154,7 +154,6 @@ function calculate() {
     if (isNaN(expressionArr[lastIndex])) return false
 
     try {
-        console.log(expressionStr)
         result = eval(expressionStr)
 
         result = Number(result)
