@@ -60,7 +60,8 @@ body {
 
 .button-num,
 .button-plus-less,
-.button-comma {
+.button-comma,
+.button-history {
     padding: 10px;
     font-size: 18px;
     text-align: center;
@@ -143,7 +144,8 @@ body {
 .button-les:active,
 .button-equal:active,
 .button-plus-less:active,
-.button-comma:active {
+.button-comma:active,
+.button-history:active {
     background-color: #cccccc;
 }
 
@@ -172,7 +174,7 @@ body {
 
 .closebtn {
     position: absolute;
-    top: -5px;
+    top: 0;
     right: 5px;
     color: var(--orange-button)  ;
     font-size: 22px;
