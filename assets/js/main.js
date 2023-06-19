@@ -243,10 +243,17 @@ function createAlertMessage(title, msg) {
     const alertHTML = `
         <div class="overlay">
             <div class="alert">
-                <span class="closebtn" onclick="this.parentElement.parentElement.remove();">&times;</span>
+                <span class="closebtn" onclick="closeAlertMessage(this);">&times;</span>
                 <strong>${title}:<br></strong> <span style="margin: 15px;">${msg}</span>
-                <button class="button-clear-history" onclick="removeLocalStorage('History')">Limpar Histórico</button>
+                <button class="button-clear-history" onclick="closeAlertMessage(this, 'History')">Limpar Histórico</button>
             </div>
         </div>`;
     container.insertAdjacentHTML('beforeend', alertHTML);
+}
+
+function closeAlertMessage(parent, item) {
+    if (item) {
+        removeLocalStorage(item)
+    }
+    parent.parentElement.parentElement.remove()
 }
