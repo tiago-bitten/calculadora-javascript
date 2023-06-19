@@ -102,6 +102,10 @@ body {
     background-color: #eaeaea;
 }
 
+.button-clear-history {
+    margin-top: 15px;
+}
+
 .button-equal,
 .button-clear-history {
     background-color: var(--orange-button);
