@@ -124,8 +124,6 @@ document.addEventListener('click', (e) => {
         clsAllDisplay()
         expressionArr = []
     }
-
-    console.log(expressionArr)
 })
 
 function addDisplay(val, type) {
