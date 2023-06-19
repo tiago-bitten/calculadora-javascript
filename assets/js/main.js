@@ -241,6 +241,7 @@ function createAlertMessage(title, msg) {
             <div class="alert">
                 <span class="closebtn" onclick="this.parentElement.parentElement.remove();">&times;</span>
                 <strong>${title}:<br></strong> <span style="margin-bottom: 15;">${msg}</span>
+                <button class="clear-history">Limpar Histórico</button>
             </div>
         </div>`;
     container.insertAdjacentHTML('beforeend', alertHTML);
