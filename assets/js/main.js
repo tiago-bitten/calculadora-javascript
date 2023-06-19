@@ -211,6 +211,10 @@ function avaliableLocalStorageHistory() {
     return false
 }
 
+function removeLocalStorage(item) {
+    localStorage.removeItem(item)
+}
+
 function getLocalStorageHistory() {
     const historyStorage = localStorage.getItem('History')
     const historyArr = JSON.parse(historyStorage)
@@ -241,7 +245,7 @@ function createAlertMessage(title, msg) {
             <div class="alert">
                 <span class="closebtn" onclick="this.parentElement.parentElement.remove();">&times;</span>
                 <strong>${title}:<br></strong> <span style="margin: 15px;">${msg}</span>
-                <button class="button-clear-history">Limpar Histórico</button>
+                <button class="button-clear-history" onclick="removeLocalStorage('History')">Limpar Histórico</button>
             </div>
         </div>`;
     container.insertAdjacentHTML('beforeend', alertHTML);
