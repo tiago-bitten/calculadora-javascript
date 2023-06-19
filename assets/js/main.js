@@ -28,6 +28,28 @@ document.addEventListener('click', (e) => {
         }
     }
 
+    if (target.classList.contains('button-plus-less')) {
+        const valueStr = display.textContent
+        const value = Number(valueStr)
+
+        const lastIndex = expressionArr.pop()
+        let newValue = 0
+
+        if (value > 0) {
+            newValue = value - 2 * (value)
+        } else if (value < 0) {
+            newValue = value - 2 * (value)
+        }
+
+        if (newValue !== 0) {
+            newValue = String(newValue)
+            expressionArr.push(newValue)
+        }
+
+        display.textContent = ''
+        addDisplay(newValue, 'num')
+    }
+
     if (target.classList.contains('button-comma')) {
         if (clsAll) {
             clsAllDisplay()
