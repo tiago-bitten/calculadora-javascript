@@ -75,7 +75,8 @@ body {
 .button-cls-all,
 .button-cls,
 .button-operator,
-.button-equal {
+.button-equal,
+.button-clear-history {
     padding: 10px;
     font-size: 18px;
     text-align: center;
@@ -101,12 +102,14 @@ body {
     background-color: #eaeaea;
 }
 
-.button-equal {
+.button-equal,
+.button-clear-history {
     background-color: var(--orange-button);
     color: #ffffff;
 }
 
-.button-equal:hover {
+.button-equal:hover,
+.button-clear-history {
     background-color: var(--orange-button-hover);
 }
 
@@ -135,20 +138,6 @@ body {
     }
 }
 
-.button-num:active,
-.button-cls-all:active,
-.button-cls:active,
-.button-div:active,
-.button-multi:active,
-.button-plus:active,
-.button-les:active,
-.button-equal:active,
-.button-plus-less:active,
-.button-comma:active,
-.button-history:active {
-    background-color: #cccccc;
-}
-
 /* Estilos para o alerta */
 .overlay {
     position: fixed;
@@ -160,6 +149,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    animation: showResult 0.3s ease;
 }
 
 .alert {
@@ -170,6 +160,7 @@ body {
     font-size: 18px;
     text-align: left;
     position: relative;
+    animation: showResult 0.3s ease;
 }
 
 .closebtn {
