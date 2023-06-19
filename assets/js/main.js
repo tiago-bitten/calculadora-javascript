@@ -29,10 +29,10 @@ document.addEventListener('click', (e) => {
     }
 
     if (target.classList.contains('button-plus-less')) {
-        const valueStr = display.textContent
+        const lastIndex = expressionArr.length - 1
+        const valueStr = expressionArr[lastIndex]
         const value = Number(valueStr)
 
-        const lastIndex = expressionArr.pop()
         let newValue = 0
 
         if (value > 0) {
@@ -43,6 +43,7 @@ document.addEventListener('click', (e) => {
 
         if (newValue !== 0) {
             newValue = String(newValue)
+            expressionArr.pop()
             expressionArr.push(newValue)
         }
 
@@ -85,8 +86,8 @@ document.addEventListener('click', (e) => {
     }
 
     if (target.classList.contains('button-equal')) {
-        if (!(expressionArr.length === 0)) {
-            const result = calculate()
+        const result = calculate()
+        if (result && expressionArr.length !== 0) {
             addDisplay(result, 'result')
 
             expressionArr = []
@@ -147,6 +148,9 @@ function calculate() {
     let result = ''
     let resExpression = ''
 
+    const lastIndex = expressionArr.length - 1
+    if (isNaN(expressionArr[lastIndex])) return false
+
     try {
         console.log(expressionStr)
         result = eval(expressionStr)
@@ -166,6 +170,8 @@ function calculate() {
 
     } catch (err) {
         console.log(err)
+    } finally {
+        clsAllDisplay()
     }
 }
 
@@ -244,7 +250,7 @@ function createAlertMessage(title, msg) {
         <div class="overlay">
             <div class="alert">
                 <span class="closebtn" onclick="closeAlertMessage(this);">&times;</span>
-                <strong>${title}:<br></strong> <span style="margin: 15px;">${msg}</span>
+                <strong>${title}:<br></strong>${msg}
                 <button class="button-clear-history" onclick="closeAlertMessage(this, 'History')">Limpar Histórico</button>
             </div>
         </div>`;
